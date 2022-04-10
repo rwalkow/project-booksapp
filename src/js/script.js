@@ -40,13 +40,20 @@
       bookImage.addEventListener('dblclick', function(event){
         event.preventDefault();
         bookImage.classList.toggle(bookImg.bookImage);
-        let bookImageId = bookImage.getAttribute('data-id');
-        favoriteBooks.push(bookImageId);
+        const bookImageId = bookImage.getAttribute('data-id');
+        if(favoriteBooks.includes(bookImageId)){
+          const listFav = favoriteBooks;
+          const idIndex = listFav.indexOf(bookImageId);
+          listFav.splice(idIndex, 1);
+        }
+        else {
+          favoriteBooks.push(bookImageId);
+        }
+        console.log(favoriteBooks);
       });
     }
   };
-  
+
   makeView();
   initActions();
 }
-  
