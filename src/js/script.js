@@ -35,23 +35,24 @@
   
     thisBook.container = document.querySelector(select.containerOf.bookList);
     thisBook.bookImages = thisBook.container.querySelectorAll('.book a');
-  
-    for(let bookImage of thisBook.bookImages){
-      bookImage.addEventListener('dblclick', function(event){
-        event.preventDefault();
-        bookImage.classList.toggle(bookImg.bookImage);
-        const bookImageId = bookImage.getAttribute('data-id');
+    thisBook.container.addEventListener('dblclick', function(event){
+      event.preventDefault();
+      
+      if(event.target.offsetParent.classList.contains('book__image')){
+        event.target.offsetParent.classList.toggle(bookImg.bookImage);
+        const bookImageId = event.target.offsetParent.getAttribute('data-id');
+
         if(favoriteBooks.includes(bookImageId)){
-          const listFav = favoriteBooks;
-          const idIndex = listFav.indexOf(bookImageId);
-          listFav.splice(idIndex, 1);
+          const list = favoriteBooks;
+          const idIndex = list.indexOf(bookImageId);
+          list.splice(idIndex, 1);
         }
         else {
           favoriteBooks.push(bookImageId);
         }
         console.log(favoriteBooks);
-      });
-    }
+      }
+    });
   };
 
   makeView();
