@@ -22,10 +22,14 @@
   const makeView = function(){    
     for(let book of dataSource.books) {      
       const thisBook = this;      
+
+      book.ratingBackground = setRatingBackground(book.rating);
+      book.ratingWidth = book.rating * 10;
+
       const generatedHTML = templates.menuProduct(book);     
       thisBook.bookParams = utils.createDOMFromHTML(generatedHTML);
       const bookContainer = document.querySelector(select.containerOf.bookList);
-      bookContainer.appendChild(thisBook.bookParams);  
+      bookContainer.appendChild(thisBook.bookParams);
     }   
   };
   
@@ -72,6 +76,21 @@
         console.log(filters);            
       } 
     });
+  };
+
+
+  const setRatingBackground = function(rating){
+    let ratingBg = '';    
+    if(rating < 6){
+      ratingBg = 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+    } else if(rating > 6 && rating <= 8){
+      ratingBg = 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+    } else if (rating > 8 && rating <= 9){
+      ratingBg = 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+    } else if(rating > 9){
+      ratingBg = 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
+    }
+    return ratingBg;
   };
 
   makeView();
