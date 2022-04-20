@@ -124,10 +124,10 @@
           }
         }
      
-        if(shouldBeHidden == true){        
+        if(shouldBeHidden){        
           const bookImage = document.querySelector('[data-id="' + book.id + '"]');
           bookImage.classList.add(bookImg.hidden);        
-        }  else if (shouldBeHidden == false){
+        }  else {
           const bookImage = document.querySelector('[data-id="' + book.id + '"]');
           bookImage.classList.remove(bookImg.hidden); 
         }
